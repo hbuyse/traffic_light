@@ -22,7 +22,7 @@ $(shell mkdir -p $(DIR_SRC))
 
 
 CFLAGS  += -W -Wall -Wextra -Wno-unused-function -fmessage-length=0 -D_REENTRANT -I $(DIR_INC)
-LDFLAGS += -lpthread -lwiringPi
+LDFLAGS += -lwiringPi -lpthread
 
 
 SRC      = $(shell find $(DIR_SRC) -name '*.c' | sort)
