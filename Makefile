@@ -3,14 +3,20 @@ LD       = gcc
 
 EXEC      = traffic_light.out
 
+
+TARGET = $(shell uname -m)
+DEFINE_TARGET = __$(shell uname -m | tr [:lower:] [:upper:])__
+
+
 DIR_SRC    = ./src
 DIR_INC    = ./inc
-DIR_OBJ    = ./obj
-DIR_LIB    = ./lib
 DIR_OUT    = ./out
-DIR_DEP    = $(DIR_OUT)/dep
-DIR_PREPRO = $(DIR_OUT)/prepro
-DIR_LST    = $(DIR_OUT)/lst
+DIR_TARGET = $(DIR_OUT)/$(TARGET)
+DIR_OBJ    = $(DIR_TARGET)/obj
+DIR_LIB    = $(DIR_TARGET)/lib
+DIR_DEP    = $(DIR_TARGET)/dep
+DIR_PREPRO = $(DIR_TARGET)/prepro
+DIR_LST    = $(DIR_TARGET)/lst
 DIR_TESTS  = ./tests
 
 
