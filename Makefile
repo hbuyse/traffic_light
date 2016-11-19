@@ -1,5 +1,6 @@
-CC       = gcc
-LD       = gcc
+CC       = $(CROSS_COMPILE)gcc
+LD       = $(CROSS_COMPILE)gcc
+AR       = $(CROSS_COMPILE)ar
 
 EXEC      = traffic_light.out
 
@@ -27,8 +28,9 @@ LIB_STATIC = $(DIR_LIB)/lib$(EXEC:.out=.a)
 $(shell mkdir -p $(DIR_SRC))
 
 
-CFLAGS  += -W -Wall -Wextra -Wno-unused-function -fmessage-length=0 -D_REENTRANT -I $(DIR_INC)
-LDFLAGS += -lwiringPi -lpthread
+CFLAGS  += -W -Wall -Wextra -Wno-unused-function -fmessage-length=0 -D_REENTRANT -D$(DEFINE_TARGET) -I $(DIR_INC)
+LDFLAGS += -L../wiringPi/wiringPi -lwiringPi
+LDFLAGS += -lpthread
 
 
 SRC      = $(shell find $(DIR_SRC) -name '*.c' | sort)
@@ -90,7 +92,7 @@ $(LIB_SHARED): $(OBJ_LIB)
 $(LIB_STATIC): $(OBJ_LIB)
 	@ mkdir -p $(DIR_LIB)
 	@ echo "\t\033[1;35m[AR]\t[$(OPTIM)]\t$@\033[0m"
-	$(VERBOSE) ar crs $@ $^
+	$(VERBOSE) $(AR) crs $@ $^
 
 
 test:
